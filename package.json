@@ -1,0 +1,26 @@
+{
+  "name": "react-card-scroll",
+  "version": "0.1.0",
+  "description": "A React component to navigate horizontally between cards of same width",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-component",
+    "navigation",
+    "scroll",
+    "horizontal",
+    "cards"
+  ],
+  "author": "Florian Bernard",
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^15.0.1",
+    "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "lodash": "^4.11.1",
+    "react-motion": "^0.4.2"
+  }
+}
