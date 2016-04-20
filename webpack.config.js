@@ -4,7 +4,8 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, './dist'),
-        filename: "bundle.js"
+        filename: "bundle.js",
+        libraryTarget: "commonjs2"
     },
     module: {
         loaders: [
