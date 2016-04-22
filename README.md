@@ -44,6 +44,9 @@ this.refs.cardScroll.scrollCards({toLeft: true, number:1})
 - Features
     - [ ] CSS arrows
     - [ ] Disable arrows if unable to navigate
+    - [ ] Mouse scroll triggers horizontal scroll
+- Fix
+    - [ ] Remove horizontal scroll bar
 - Technical
     - [ ] CSS loader
     - [ ] Improve packaging
