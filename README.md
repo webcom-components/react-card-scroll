@@ -42,11 +42,11 @@ this.refs.cardScroll.scrollCards({toLeft: true, number:1})
 - [ ] Tests
 - [x] Example
 - Features
-    - [ ] CSS arrows
-    - [ ] Disable arrows if unable to navigate
+    - [x] CSS arrows
+    - [x] Disable arrows if unable to navigate
     - [ ] Mouse scroll triggers horizontal scroll
 - Fix
     - [ ] Remove horizontal scroll bar
 - Technical
     - [x] CSS loader
-    - [ ] Improve packaging
+    - [ ] Improve packaging (minify, source map)

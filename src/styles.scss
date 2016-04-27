@@ -1,0 +1,62 @@
+:global(.row).container {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+}
+
+$border-color: #ccc;
+$padding: 4px;
+$outMargin: -15px;
+$outPadding: $padding - $outMargin;
+
+@mixin arrow{
+    position: fixed;
+    top: 50%;
+    z-index: 1;
+    height: 20%;
+    padding: $padding;
+    border-top: $border-color solid 1px;
+    border-bottom: $border-color solid 1px;
+    display: flex;
+    align-items: center;
+    transition: margin 0.5s;
+}
+
+.rightArrow {
+    @include arrow;
+    background: linear-gradient(to right, white, #eee);
+    right: 0;
+    border-left: $border-color solid 1px;
+    border-radius: 2px 0 0 2px;
+    margin-right: $outMargin;
+    padding-right: $outPadding;
+    cursor: pointer;
+    .arrow{
+        &::after{
+            content: ">"
+        }
+    }
+    &:hover{
+        background: linear-gradient(to right, #ddd, #ccc);
+        margin-right: 0;
+    }
+}
+
+.leftArrow {
+    @include arrow;
+    background: linear-gradient(to left, white, #eee);
+    left: 0;
+    border-right: $border-color solid 1px;
+    border-radius: 0 2px 2px 0;
+    margin-left: $outMargin;
+    padding-left: $outPadding;
+    .arrow{
+        &::after{
+            content: "<"
+        }
+    }
+    &:hover{
+        background: linear-gradient(to left, #ddd, #ccc);
+        margin-left: 0;
+    }
+}
