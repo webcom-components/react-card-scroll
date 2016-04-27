@@ -1,6 +1,7 @@
 import React from 'react';
 import {throttle} from 'lodash'
 import {Motion, spring} from 'react-motion'
+import s from 'style!css?modules!./styles.css'
 
 let CardScroll = React.createClass({
     getInitialState(){
@@ -20,18 +21,14 @@ let CardScroll = React.createClass({
         }
         return (
             <div className="scroll-container flex-item">
-                <div style={{position: "fixed", left: 0, top: "50%", zIndex: 1}}
+                <div className={s.leftArrow}
                      onClick={this.scrollCardsWrap({toLeft: true})}>{"<"}</div>
-                <div style={{position: "fixed", right: 0, top: "50%", zIndex: 1}}
+                <div className={s.rightArrow}
                      onClick={this.scrollCardsWrap()}>{">"}</div>
                 <Motion style={{left: spring(currentLeft)}}>
                     {value => {
-                        Object.assign(value, {
-                            flexWrap: "nowrap",
-                            position: "relative"
-                        })
                         return (
-                            <div className="row"
+                            <div className={`row ${s.container}`}
                                  style={value}
                                  ref={c => updateRow(c)}>
                                 {this.props.children}

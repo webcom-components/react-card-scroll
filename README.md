@@ -40,7 +40,7 @@ this.refs.cardScroll.scrollCards({toLeft: true, number:1})
 
 ## TODO
 - [ ] Tests
-- [ ] Example
+- [x] Example
 - Features
     - [ ] CSS arrows
     - [ ] Disable arrows if unable to navigate
@@ -48,5 +48,5 @@ this.refs.cardScroll.scrollCards({toLeft: true, number:1})
 - Fix
     - [ ] Remove horizontal scroll bar
 - Technical
-    - [ ] CSS loader
+    - [x] CSS loader
     - [ ] Improve packaging
