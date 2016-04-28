@@ -1,24 +1,68 @@
-import React from 'react';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import {throttle} from 'lodash'
 import {Motion, spring} from 'react-motion'
 import s from 'style!css?modules!sass!./styles.scss'
+
+const defaultWidths = {
+    card: 0,
+    container: 0
+}
 
 let CardScroll = React.createClass({
     getInitialState(){
         return {currentLeft: 0, currentCard: 0}
     },
 
+    componentWillMount() {
+        this.widths = defaultWidths
+        this.children = {}
+    },
+
     componentDidMount() {
-        window.addEventListener('resize', throttle(() => this.scrollCards({number: 0})));
+        this.widths = this.computeWidths()
+        window.addEventListener('resize', this.handleResize);
+    },
+
+    componentDidUpdate(){
+        // case children were removed
+        if(this.canScrollLeft() && this.lastVisibleCardIndex()>=React.Children.count(this.props.children)){
+            this.scrollCards({number:0})
+        }
+    },
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
+    },
+
+    handleResize() {
+        if(!this._handleResize){
+            this._handleResize = throttle(() => {
+                this.widths = this.computeWidths()
+                this.scrollCards({number: 0})
+            })
+        }
+        this._handleResize()
+    },
+
+    computeWidths() {
+        const childrenCount = React.Children.count(this.props.children)
+        if(childrenCount==0){
+            return defaultWidths
+        }
+        // get first child as all children should be of equal width
+        const card = ReactDOM.findDOMNode(this._child).getBoundingClientRect().width
+        const container = this._container.clientWidth
+        return {
+            card,
+            container
+        }
     },
 
     render() {
         const {currentLeft} = this.state
-        const updateRow = c => {
-            if (c) {
-                this._row = c
-            }
-        }
+        const updateContainer = c => c && (this._container = c)
+        const updateChild = c => c && (this._child= c)
         return (
             <div>
                 {this.canScrollLeft()?
@@ -34,13 +78,25 @@ let CardScroll = React.createClass({
                     </div>
                         :null}
                 <Motion style={{left: spring(currentLeft)}}>
-                    {value => (
-                        <div className={`row ${s.container}`}
+                    {value => {
+                        let first = true
+                        return (<div className={`row ${s.container}`}
                              style={value}
-                             ref={c => updateRow(c)}>
-                            {this.props.children}
-                        </div>
-                    )}
+                             ref={updateContainer}>
+                            {React.Children.map(this.props.children, child => {
+                                if(first){
+                                    first = false
+                                    return React.cloneElement(child, {
+                                        ref: updateChild
+                                    });
+                                } else {
+                                    return child
+                                }
+                                
+                            })}
+
+                        </div>)
+                    }}
                 </Motion>
             </div>
         )
@@ -56,7 +112,7 @@ let CardScroll = React.createClass({
             number = this.state.currentCard
         }
         const visibleCardCount = this.getVisibleCardCount()
-        const cardCount = this.props.getCardCount()
+        const cardCount = React.Children.count(this.props.children)
         if (!toLeft && this.state.currentCard + visibleCardCount + number > cardCount) {
             // gonna scroll too much to the right so scroll so the last card is at the right
             number = -this.state.currentCard + cardCount - visibleCardCount
@@ -66,17 +122,21 @@ let CardScroll = React.createClass({
             // case where we wanna display last card at the right but not enough cards
             currentCard = 0
         }
-        const cardWidth = this.props.getCardWidth()
+        const cardWidth = this.widths.card
         const currentLeft = -currentCard * cardWidth
         this.setState({currentLeft, currentCard})
     },
 
     getVisibleCardCount(){
-        return this._row?Math.floor(this._row.clientWidth / this.props.getCardWidth()):0
+        return Math.floor(this.widths.container / this.widths.card)
+    },
+
+    lastVisibleCardIndex(){
+        return this.state.currentCard + this.getVisibleCardCount()-1
     },
 
     canScrollRight(){
-        return this.state.currentCard + this.getVisibleCardCount() < this.props.getCardCount()
+        return this.lastVisibleCardIndex()+1 < React.Children.count(this.props.children)
     },
 
     canScrollLeft(){
