@@ -1,3 +1,9 @@
 $enable-flex: true;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+.card-header{
+  &:hover{
+    background-image: linear-gradient(0, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  }
+}

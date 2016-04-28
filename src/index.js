@@ -20,7 +20,7 @@ let CardScroll = React.createClass({
             }
         }
         return (
-            <div className="scroll-container flex-item">
+            <div>
                 {this.canScrollLeft()?
                     <div className={s.leftArrow}
                          onClick={this.scrollCardsWrap({toLeft: true})}>
