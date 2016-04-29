@@ -8,7 +8,9 @@ const compiler = webpack({
     entry: ["./example/index.js","./example/theme.scss", "./hotReloadScript.js", "webpack/hot/dev-server"],
     output: {
         path: path.join(__dirname, './example/dist'),
+        filename: "example.bundle.js",
     },
+    devtool: 'source-map',
     module: {
         loaders: [
             { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },

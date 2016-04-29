@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {throttle} from 'lodash'
 import {Motion, spring} from 'react-motion'
-import s from 'style!css?modules!sass!./styles.scss'
+import s from './styles.scss'
 
 const defaultWidths = {
     card: 0,

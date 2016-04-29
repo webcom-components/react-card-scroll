@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import CardScroll from '../dist/bundle'
+import CardScroll from '../lib'
 
 const ScrollableTitleCard = React.createClass({
     componentDidMount() {

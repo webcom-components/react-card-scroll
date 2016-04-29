@@ -18,6 +18,9 @@ npm i -S react-card-scroll
 
 ## Usage
 
+Import css ```~react-card-scroll/lib/assets/styles.css```
+
+
 ```jsx
 <CardScroll ref="cardScroll">
     <div className="col-sm-6 col-md-4">
@@ -43,15 +46,17 @@ From parent, trigger navigation when you want (add or remove cards, click somewh
 this.refs.cardScroll.scrollCards({toLeft: true, number:1})
 ```
 
+
+
 ## TODO
 - [ ] Tests
 - [x] Example
 - Features
     - [x] CSS arrows
     - [x] Disable arrows if unable to navigate
-    - [ ] ~~Mouse scroll triggers horizontal scroll~~ (it is up to the user, see example)
+    ~~- [ ] Mouse scroll triggers horizontal scroll~~ (it is up to the user, see example)
 - Fix
     - [x] Remove horizontal scroll bar
 - Technical
     - [x] CSS loader
-    - [ ] Improve packaging (minify, source map)
+    - [x] Improve packaging (babel + css)

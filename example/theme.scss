@@ -1,6 +1,7 @@
 $enable-flex: true;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import "../lib/assets/styles.css";
 
 .card-header{
   &:hover{
