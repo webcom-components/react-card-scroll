@@ -21,6 +21,7 @@ let CardScroll = React.createClass({
 
     componentDidMount() {
         this.widths = this.computeWidths()
+        this.setState(this.getInitialState())
         window.addEventListener('resize', this.handleResize);
     },
 

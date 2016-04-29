@@ -1,11 +1,12 @@
 {
   "name": "react-card-scroll",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A React component to navigate horizontally between cards of same width",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "BABEL_DISABLE_CACHE=1 NODE_ENV=LIB babel -d lib/ src",
+    "dev": "BABEL_DISABLE_CACHE=1 NODE_ENV=LIB babel -d lib/ src -w",
     "example": "node webpack.example.js",
     "prepublish": "BABEL_DISABLE_CACHE=1 NODE_ENV=LIB babel -d lib/ src"
   },
