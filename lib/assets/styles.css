@@ -1,7 +1,9 @@
 .row._1H7C65wd8WJqBtCRmAfokb {
-  display: flex;
-  flex-wrap: nowrap;
   position: relative; }
+
+._1H7C65wd8WJqBtCRmAfokb ._358enaiolY7BZPuXLuxdRA {
+  position: absolute;
+  transition: left 1s; }
 
 ._22yQcZhJvmCSA52vE9VrUe {
   position: fixed;

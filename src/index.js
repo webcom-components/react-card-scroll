@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {throttle} from 'lodash'
 import {Motion, spring} from 'react-motion'
 import s from './styles.scss'
+import {getOffset, getMaxOffset} from './offset'
 
 const defaultWidths = {
     card: 0,
@@ -11,7 +12,7 @@ const defaultWidths = {
 
 let CardScroll = React.createClass({
     getInitialState(){
-        return {currentLeft: 0, currentCard: 0}
+        return {currentCard: 0}
     },
 
     componentWillMount() {
@@ -20,11 +21,12 @@ let CardScroll = React.createClass({
     },
 
     componentDidMount() {
+        this.maxOffset = getMaxOffset()
         this.widths = this.computeWidths()
         this.setState(this.getInitialState())
         window.addEventListener('resize', this.handleResize);
     },
-
+    
     componentDidUpdate(){
         // case children were removed
         if(this.canScrollLeft() && this.lastVisibleCardIndex()>=React.Children.count(this.props.children)){
@@ -61,9 +63,11 @@ let CardScroll = React.createClass({
     },
 
     render() {
-        const {currentLeft} = this.state
+        const {currentCard} = this.state
+        const lastCard = this.lastVisibleCardIndex()
         const updateContainer = c => c && (this._container = c)
         const updateChild = c => c && (this._child= c)
+        let first = true
         return (
             <div>
                 {this.canScrollLeft()?
@@ -78,27 +82,35 @@ let CardScroll = React.createClass({
                         <div className={s.arrow}></div>
                     </div>
                         :null}
-                <Motion style={{left: spring(currentLeft)}}>
-                    {value => {
-                        let first = true
-                        return (<div className={`row ${s.container}`}
-                             style={value}
-                             ref={updateContainer}>
-                            {React.Children.map(this.props.children, child => {
-                                if(first){
-                                    first = false
-                                    return React.cloneElement(child, {
-                                        ref: updateChild
-                                    });
-                                } else {
-                                    return child
-                                }
-                                
-                            })}
+                    <div className={`row ${s.container}`}
+                         style={{marginLeft: this.maxOffset, marginRight: this.maxOffset}}
+                         ref={updateContainer}>
+                        {React.Children.map(this.props.children, (child, index) => {
+                            let props = {className: s.stack}
 
-                        </div>)
-                    }}
-                </Motion>
+                            if(first){
+                                first = false
+                                props.ref= updateChild
+                            }
+
+                            const offset = getOffset({index, firstVisibleIndex:currentCard, lastVisibleIndex:lastCard, cardWidth:this.widths.card})
+                            let position = offset
+                            let zIndex = 0
+                            if(offset==0){
+                                position = (index-currentCard)*this.widths.card
+                                if(index == lastCard){
+                                    zIndex = -1
+                                }
+                            } else if(offset>0){
+                                position = offset + (lastCard-currentCard)*this.widths.card
+                                zIndex = lastCard-index-1
+                            }
+                            props.style = {left: position, zIndex}
+                            props.className = s.stack
+
+                            return React.cloneElement(child, props);
+                        })}
+                    </div>
             </div>
         )
     },

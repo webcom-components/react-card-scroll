@@ -1,7 +1,10 @@
 :global(.row).container {
-    display: flex;
-    flex-wrap: nowrap;
     position: relative;
+}
+
+.container .stack{
+    position: absolute;
+    transition: left 1s;
 }
 
 $border-color: #ccc;

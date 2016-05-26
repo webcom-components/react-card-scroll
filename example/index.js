@@ -10,14 +10,14 @@ const ScrollableTitleCard = React.createClass({
         })
     },
     render() {
-        const {title, children} = this.props
+        const {title, children, className, style} = this.props
         return (
-            <div className="col-sm-6 col-md-4">
+            <div className={"col-sm-6 col-md-4 "+className} style={style}>
                 <div className="card">
                     <div ref="title" className="card-header">
                         {title}
                     </div>
-                    <div className="card-body">
+                    <div className="card-block">
                         {children}
                     </div>
                 </div>
