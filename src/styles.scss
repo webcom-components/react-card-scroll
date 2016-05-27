@@ -1,7 +1,12 @@
-:global(.row).container {
-    display: flex;
-    flex-wrap: nowrap;
+.container {
     position: relative;
+    box-sizing: border-box;
+}
+
+.container .stack{
+    position: absolute;
+    transition: left 1s cubic-bezier(0,.7,.7,1);
+    box-sizing: border-box;
 }
 
 $border-color: #ccc;
@@ -60,3 +65,67 @@ $outPadding: $padding - $outMargin;
         margin-left: 0;
     }
 }
+
+$grid-breakpoints: (
+    // Extra small screen / phone
+        xs: 0,
+    // Small screen / phone
+        sm: 544px,
+    // Medium screen / tablet
+        md: 768px,
+    // Large screen / desktop
+        lg: 992px,
+    // Extra large screen / wide desktop
+        xl: 1200px
+) !default;
+
+$grid-columns:               12 !default;
+$grid-gutter-width:          1.875rem !default; // 30px
+
+@mixin make-col-span($size, $columns: $grid-columns) {
+    width: percentage($size / $columns);
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+    $min: map-get($breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+@mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+    // Common properties for all breakpoints
+    %grid-column {
+        // Prevent columns from collapsing when empty
+        min-height: 1px;
+        // Inner gutter via padding
+        padding-left: ($gutter / 2);
+        padding-right: ($gutter / 2);
+        width: 100%;
+    }
+    @each $breakpoint in map-keys($breakpoints) {
+        @for $i from 1 through $columns {
+            .container :global(.rcs-col-#{$breakpoint}-#{$i}) {
+                @extend %grid-column;
+            }
+        }
+        @include media-breakpoint-up($breakpoint) {
+            @for $i from 1 through $columns {
+                .container :global(.rcs-col-#{$breakpoint}-#{$i}) {
+                    @include make-col-span($i, $columns);
+                }
+            }
+        }
+    }
+}
+
+@include make-grid-columns();

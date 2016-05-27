@@ -5,19 +5,26 @@ import CardScroll from '../lib'
 const ScrollableTitleCard = React.createClass({
     componentDidMount() {
         this.refs.title.addEventListener('wheel', event => {
-            this.props.onScrollTitle({toLeft:event.wheelDelta>0})
+            this.props.scrollCards({toLeft:event.wheelDelta>0})
             event.preventDefault()
         })
     },
     render() {
-        const {title, children} = this.props
+        const {title, children, className, style} = this.props
+        const onClick = ev => {
+            const offset = this.props.getCardOffset()
+            if(offset!=0){
+                ev.preventDefault()
+                this.props.scrollCards({toLeft:offset<0})
+            }
+        }
         return (
-            <div className="col-sm-6 col-md-4">
-                <div className="card">
+            <div className={"col rcs-col-sm-6 rcs-col-md-4 rcs-col-lg-3 "+className} style={style}>
+                <div onClick={onClick} className="card">
                     <div ref="title" className="card-header">
                         {title}
                     </div>
-                    <div className="card-body">
+                    <div className="card-block">
                         {children}
                     </div>
                 </div>
@@ -64,13 +71,14 @@ const Example = React.createClass({
     },
     
     render() {
-        const onScrollTitle = params => this.refs.cardScroll.scrollCards(params)
+        const scrollCards = params => this.refs.cardScroll.scrollCards(params)
+        const getCardOffset = index => () => this.refs.cardScroll.getCardOffset(index)
         return (
             <div>
                 <button onClick={this.addCard}>Add card</button>
                 <button onClick={this.removeCard}>Remove last card</button>
                 <CardScroll ref="cardScroll">
-                    {this.state.cards.map(el => React.cloneElement(el, {onScrollTitle}))}
+                    {this.state.cards.map((el, index) => React.cloneElement(el, {scrollCards, getCardOffset:getCardOffset(index)}))}
                 </CardScroll>
             </div>
         )
