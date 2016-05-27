@@ -1,15 +1,14 @@
 # react-card-scroll
 A React component to horizontally navigate between components of same width (Bootstrap cards for example).  
-It is responsive and support card adds and removes.
+It is responsive and support dynamic card adds and removes.
 
+You decide how many cards will be simultaneously visible depending on screen size, in the bootstrap style. You can then navigate to the other cards depending on how you want to implement it. If you don't want to implement anything, you can use default arrows.
 
-For example you can have 3 cards on the screen and there is a total of 5 cards, you can navigate right or left to the cards not displayed.  
-You resize and you display only 2 cards, you can still navigate to the other cards.
+Visually you have a left stack of cards, visible cards in the middle, and a right stack.
 
-Navigation can also be triggered programmatically.
-
-## New in 1.x
-No need to give card width and card count anymore
+## New in 2.x
+Using stacks instead of sliding cards out of the screen
+Doesn't use react-motion anymore
 
 ## Installation
 ```bash
@@ -18,24 +17,33 @@ npm i -S react-card-scroll
 
 ## Usage
 
-Import css ```~react-card-scroll/lib/assets/styles.css```
+Import css either in sass ```~react-card-scroll/lib/assets/styles.css``` or in javascript with webpack
 
+Use bootstrap style to decide how many cards will be visible (just add ```rcs-```): ```rcs-col-*-*```. You don't have to include bootstrap.
 
+Choose how you want to implement the navigation by using ```scrollCards({toLeft: true/false, number:*})```.For example, you can scroll when you click on a stack or when you wheel your mouse with the pointer on a card title.
+See the example: ```npm run example``` and open localhost:8081. And get inspiration from the source code.
+
+You can know where a card is with the ```getCardOffset``` function in JavaScript, or with the CSS classes ```rcs-left-stack rcs-center rcs-right-stack```
+
+Use arrows with props ```showArrows={true}```
+
+## Some (very) basic usage
 ```jsx
 <CardScroll ref="cardScroll">
-    <div className="col-sm-6 col-md-4">
+    <div className="rcs-col-sm-6 rcs-col-md-4">
     </div>
     
-    <div className="col-sm-6 col-md-4">
+    <div className="rcs-col-sm-6 rcs-col-md-4">
     </div>
     
-    <div className="col-sm-6 col-md-4">
+    <div className="rcs-col-sm-6 rcs-col-md-4">
     </div>
     
-    <div className="col-sm-6 col-md-4">
+    <div className="rcs-col-sm-6 rcs-col-md-4">
     </div>
     
-    <div className="col-sm-6 col-md-4">
+    <div className="rcs-col-sm-6 rcs-col-md-4">
     </div>
 </CardScroll>
 ```
@@ -46,15 +54,14 @@ From parent, trigger navigation when you want (add or remove cards, click somewh
 this.refs.cardScroll.scrollCards({toLeft: true, number:1})
 ```
 
-
-
 ## TODO
-- [ ] Tests
+- [x] Tests
 - [x] Example
 - Features
     - [x] CSS arrows
     - [x] Disable arrows if unable to navigate
-    ~~- [ ] Mouse scroll triggers horizontal scroll~~ (it is up to the user, see example)
+    - [ ] ~~Mouse scroll triggers horizontal scroll~~ (it is up to the user, see example)
+    - [x] Stacks
 - Fix
     - [x] Remove horizontal scroll bar
 - Technical
