@@ -29,7 +29,7 @@ You can know where a card is with the ```getCardOffset``` function in JavaScript
 Use arrows with props ```showArrows={true}```
 
 ## Example demo
-![react-card-scroll](https://cloud.githubusercontent.com/assets/11945259/15610281/bcbcd0b2-2424-11e6-9e65-304a690f467e.gif)
+![react-card-scroll](https://cloud.githubusercontent.com/assets/11945259/15610699/db52c656-2426-11e6-9228-dd622dadfb86.gif)
 
 ## Some (very) basic usage
 ```jsx
