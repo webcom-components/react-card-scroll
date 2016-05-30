@@ -57,7 +57,6 @@ let CardScroll = React.createClass({
         const container = this._container.getBoundingClientRect().width-this.maxOffset*2
         // get first child as all children should be of equal width
         const card = ReactDOM.findDOMNode(this._child).getBoundingClientRect().width*container/this._container.getBoundingClientRect().width
-        console.log({card, container})
         return {
             card,
             container

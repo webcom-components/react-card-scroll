@@ -5,6 +5,7 @@ $outPadding: $padding - $outMargin;
 
 .container {
     position: relative;
+    z-index: 0;
     box-sizing: border-box;
     :global(.rcs-center), :global(.rcs-left-stack), :global(.rcs-right-stack){
         position: absolute;
