@@ -71,13 +71,13 @@ let CardScroll = React.createClass({
         let first = true
         return (
             <div>
-                {this.canScrollLeft()?
+                {this.showArrows() && this.canScrollLeft()?
                     <div className={s.leftArrow}
                          onClick={this.scrollCardsWrap({toLeft: true})}>
                         <div className={s.arrow}></div>
                     </div>
                         :null}
-                {this.canScrollRight()?
+                {this.showArrows() && this.canScrollRight()?
                     <div className={s.rightArrow}
                          onClick={this.scrollCardsWrap()}>
                         <div className={s.arrow}></div>
@@ -153,11 +153,15 @@ let CardScroll = React.createClass({
     },
 
     canScrollRight(){
-        return this.props.showArrows && this.lastVisibleCardIndex()+1 < React.Children.count(this.props.children)
+        return this.lastVisibleCardIndex()+1 < React.Children.count(this.props.children)
     },
 
     canScrollLeft(){
-        return this.props.showArrows && this.state.currentCard>0
+        return this.state.currentCard>0
+    },
+
+    showArrows(){
+        return this.props.showArrows
     },
 
     /**
