@@ -57,18 +57,19 @@ let CardScroll = React.createClass({
         const container = this._container.getBoundingClientRect().width-this.maxOffset*2
         // get first child as all children should be of equal width
         const card = ReactDOM.findDOMNode(this._child).getBoundingClientRect().width*container/this._container.getBoundingClientRect().width
+        console.log({card, container})
         return {
             card,
             container
         }
     },
-
+    
     render() {
         const {currentCard} = this.state
+        const {childrenClass} = this.props
         const lastCard = this.lastVisibleCardIndex()
         const updateContainer = c => c && (this._container = c)
         const updateChild = c => c && (this._child= c)
-        let first = true
         return (
             <div>
                 {this.showArrows() && this.canScrollLeft()?
@@ -87,13 +88,6 @@ let CardScroll = React.createClass({
                          style={{marginLeft: this.maxOffset, marginRight: this.maxOffset}}
                          ref={updateContainer}>
                         {React.Children.map(this.props.children, (child, index) => {
-                            let props = {className: s.stack}
-
-                            if(first){
-                                first = false
-                                props.ref= updateChild
-                            }
-
                             const offset = getOffset({index, firstVisibleIndex:currentCard, lastVisibleIndex:lastCard})
                             let position = offset
                             let zIndex = 0
@@ -109,10 +103,12 @@ let CardScroll = React.createClass({
                                 zIndex = lastCard-index-1
                                 className = "rcs-right-stack"
                             }
-                            props.style = {left: position, zIndex}
-                            props.className = `${className} ${s.stack}`
-
-                            return React.cloneElement(child, props);
+                            const style = {left: position, zIndex}
+                            return (
+                                <div className={`${className} ${childrenClass}`} style={style} ref={index == 0 && updateChild}>
+                                    {child}
+                                </div>
+                            );
                         })}
                     </div>
             </div>

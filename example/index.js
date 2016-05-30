@@ -15,7 +15,7 @@ const ScrollableTitleCard = React.createClass({
         })
     },
     render() {
-        const {title, children, className, style} = this.props
+        const {title, children} = this.props
         const onClick = ev => {
             const offset = this.props.getCardOffset()
             if (offset != 0) {
@@ -24,14 +24,12 @@ const ScrollableTitleCard = React.createClass({
             }
         }
         return (
-            <div className={"col rcs-col-sm-6 rcs-col-md-4 rcs-col-lg-3 "+className} style={style}>
-                <div onClick={onClick} className="card">
-                    <div ref="title" className="card-header">
-                        {title}
-                    </div>
-                    <div className="card-block">
-                        {children}
-                    </div>
+            <div onClick={onClick} className="card">
+                <div ref="title" className="card-header">
+                    {title}
+                </div>
+                <div className="card-block">
+                    {children}
                 </div>
             </div>
         )
@@ -89,7 +87,7 @@ const Example = React.createClass({
             <div>
                 <button onClick={this.addCard}>Add card</button>
                 <button onClick={this.removeCard}>Remove last card</button>
-                <CardScroll ref="cardScroll">
+                <CardScroll ref="cardScroll" childrenClass="col rcs-col-sm-6 rcs-col-md-4 rcs-col-lg-3">
                     {this.state.cards.map((el, index) => React.cloneElement(el, {
                         scrollCards,
                         getCardOffset: getCardOffset(index)

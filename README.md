@@ -8,6 +8,7 @@ Visually you have a left stack of cards, visible cards in the middle, and a righ
 
 ## New in 2.x
 Using stacks instead of sliding cards out of the screen
+Pass children CSS class as props
 Doesn't use react-motion anymore
 
 ## Installation
@@ -19,34 +20,35 @@ npm i -S react-card-scroll
 
 Import css either in sass ```~react-card-scroll/lib/assets/styles.css``` or in javascript with webpack
 
-Use bootstrap style to decide how many cards will be visible (just add ```rcs-```): ```rcs-col-*-*```. You don't have to include bootstrap.
+Use bootstrap style to decide how many cards will be visible at a give screen size (just add ```rcs-```): ```rcs-col-*-*```. You don't have to include bootstrap.
 
 Choose how you want to implement the navigation by using ```scrollCards({toLeft: true/false, number:*})```.For example, you can scroll when you click on a stack or when you wheel your mouse with the pointer on a card title.
-See the example: ```npm run example``` and open localhost:8081. And get inspiration from the source code.
+See the example: ```npm run example``` and open ```localhost:8081```. And get inspiration from the source code.
 
 You can know where a card is with the ```getCardOffset``` function in JavaScript, or with the CSS classes ```rcs-left-stack rcs-center rcs-right-stack```
 
-Use arrows with props ```showArrows={true}```
+Use default navigation arrows with props ```showArrows={true}```
 
 ## Example demo
 ![react-card-scroll](https://cloud.githubusercontent.com/assets/11945259/15610699/db52c656-2426-11e6-9228-dd622dadfb86.gif)
 
 ## Some (very) basic usage
 ```jsx
-<CardScroll ref="cardScroll">
-    <div className="rcs-col-sm-6 rcs-col-md-4">
+<CardScroll ref="cardScroll" childrenClass="rcs-col-sm-6 rcs-col-md-4">
+    <div>
+        Hello
     </div>
     
-    <div className="rcs-col-sm-6 rcs-col-md-4">
+    <div>
+        World
     </div>
     
-    <div className="rcs-col-sm-6 rcs-col-md-4">
+    <div>
+        Foo
     </div>
     
-    <div className="rcs-col-sm-6 rcs-col-md-4">
-    </div>
-    
-    <div className="rcs-col-sm-6 rcs-col-md-4">
+    <div>
+        Bar
     </div>
 </CardScroll>
 ```
@@ -58,15 +60,4 @@ this.refs.cardScroll.scrollCards({toLeft: true, number:1})
 ```
 
 ## TODO
-- [x] Tests
-- [x] Example
-- Features
-    - [x] CSS arrows
-    - [x] Disable arrows if unable to navigate
-    - [ ] ~~Mouse scroll triggers horizontal scroll~~ (it is up to the user, see example)
-    - [x] Stacks
-- Fix
-    - [x] Remove horizontal scroll bar
-- Technical
-    - [x] CSS loader
-    - [x] Improve packaging (babel + css)
+- [ ] Improve margin stack algorithm
