@@ -10,12 +10,20 @@ const defaultWidths = {
 }
 
 let CardScroll = React.createClass({
+
+    getDefaultProps(){
+        return {
+            visibleStack: 3,
+            stackSpace: 5
+        }
+    },
+
     getInitialState(){
         return {currentCard: 0}
     },
 
     componentWillMount() {
-        this.maxOffset = getMaxOffset()
+        this.maxOffset = getMaxOffset({visibleStack: this.props.visibleStack, stackSpace: this.props.stackSpace})
         this.widths = defaultWidths
         this.children = {}
     },
@@ -53,10 +61,9 @@ let CardScroll = React.createClass({
         if(childrenCount==0){
             return defaultWidths
         }
-        // anticipate the margin that we will add
-        const container = this._container.getBoundingClientRect().width-this.maxOffset*2
+        const container = this._container.getBoundingClientRect().width
         // get first child as all children should be of equal width
-        const card = ReactDOM.findDOMNode(this._child).getBoundingClientRect().width*container/this._container.getBoundingClientRect().width
+        const card = ReactDOM.findDOMNode(this._child).getBoundingClientRect().width
         return {
             card,
             container
@@ -87,7 +94,13 @@ let CardScroll = React.createClass({
                          style={{marginLeft: this.maxOffset, marginRight: this.maxOffset}}
                          ref={updateContainer}>
                         {React.Children.map(this.props.children, (child, index) => {
-                            const offset = getOffset({index, firstVisibleIndex:currentCard, lastVisibleIndex:lastCard})
+                            const offset = getOffset({
+                                index,
+                                firstVisibleIndex:currentCard,
+                                lastVisibleIndex:lastCard,
+                                visibleStack: this.props.visibleStack,
+                                stackSpace: this.props.stackSpace
+                            })
                             let position = offset
                             let zIndex = 0
                             let className = "rcs-left-stack"
@@ -165,7 +178,13 @@ let CardScroll = React.createClass({
      * return negative number if card is on left stack, 0 if visible, positive number if card is on right stack
      */
     getCardOffset(index){
-        return getOffset({index, firstVisibleIndex:this.state.currentCard, lastVisibleIndex:this.lastVisibleCardIndex()})
+        return getOffset({
+            index,
+            firstVisibleIndex:this.state.currentCard,
+            lastVisibleIndex:this.lastVisibleCardIndex(),
+            visibleStack: this.props.visibleStack,
+            stackSpace: this.props.stackSpace
+        })
     }
 })
 

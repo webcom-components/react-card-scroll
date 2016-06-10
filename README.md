@@ -7,9 +7,11 @@ You decide how many cards will be simultaneously visible depending on screen siz
 Visually you have a left stack of cards, visible cards in the middle, and a right stack.
 
 ## New in 2.x
-Using stacks instead of sliding cards out of the screen
-Pass children CSS class as props
-Doesn't use react-motion anymore
+
+**New in 2.1:** expose stacks parameters  
+Using stacks instead of sliding cards out of the screen  
+Pass children CSS class as props  
+Doesn't use react-motion anymore  
 
 ## Installation
 ```bash
@@ -29,12 +31,18 @@ You can know where a card is with the ```getCardOffset``` function in JavaScript
 
 Use default navigation arrows with props ```showArrows={true}```
 
+You can change the default parameters ```visibleStack``` et ```stackSpace```, which determine how many cards of the stacks are shifted on the sides, and by how many pixels.
+
 ## Example demo
 ![react-card-scroll](https://cloud.githubusercontent.com/assets/11945259/15610699/db52c656-2426-11e6-9228-dd622dadfb86.gif)
 
 ## Some (very) basic usage
 ```jsx
-<CardScroll ref="cardScroll" childrenClass="rcs-col-sm-6 rcs-col-md-4">
+<CardScroll 
+    ref="cardScroll" 
+    childrenClass="rcs-col-sm-6 rcs-col-md-4"
+    visibleStack={1}
+    stackSpace={25}>
     <div>
         Hello
     </div>
