@@ -34,6 +34,7 @@
     "babel-tape-runner": "^2.0.1",
     "bootstrap": "^4.0.0-alpha.2",
     "css-loader": "^0.23.1",
+    "cz-conventional-changelog": "^1.1.6",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.16.0",
     "node-sass": "^3.6.0",
@@ -47,5 +48,10 @@
   },
   "dependencies": {
     "lodash": "^4.11.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
