@@ -9,7 +9,7 @@ $outPadding: $padding - $outMargin;
     box-sizing: border-box;
     :global(.rcs-center), :global(.rcs-left-stack), :global(.rcs-right-stack){
         position: absolute;
-        transition: left 1s cubic-bezier(0,.7,.7,1);
+        transition: left 1s cubic-bezier(0,.7,.7,1), z-index 1s cubic-bezier(0,.7,.7,1);
         box-sizing: border-box;
     }
 }

@@ -4,7 +4,7 @@
   box-sizing: border-box; }
   ._1H7C65wd8WJqBtCRmAfokb .rcs-center, ._1H7C65wd8WJqBtCRmAfokb .rcs-left-stack, ._1H7C65wd8WJqBtCRmAfokb .rcs-right-stack {
     position: absolute;
-    transition: left 1s cubic-bezier(0, 0.7, 0.7, 1);
+    transition: left 1s cubic-bezier(0, 0.7, 0.7, 1), z-index 1s cubic-bezier(0, 0.7, 0.7, 1);
     box-sizing: border-box; }
 
 ._22yQcZhJvmCSA52vE9VrUe {

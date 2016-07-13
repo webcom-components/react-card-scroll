@@ -102,12 +102,12 @@ let CardScroll = React.createClass({
                                 stackSpace: this.props.stackSpace
                             })
                             let position = offset
-                            let zIndex = 0
+                            let zIndex = -currentCard+index
                             let className = "rcs-left-stack"
                             if(offset==0){
                                 position = (index-currentCard)*this.widths.card
                                 if(index == lastCard && currentCard != lastCard){
-                                    zIndex = -1
+                                    zIndex = 0
                                 }
                                 className = "rcs-center"
                             } else if(offset>0){
@@ -126,7 +126,7 @@ let CardScroll = React.createClass({
             </div>
         )
     },
-
+    
     scrollCardsWrap(params){
         return () => this.scrollCards(params)
     },
