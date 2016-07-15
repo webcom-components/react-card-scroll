@@ -83,46 +83,49 @@ let CardScroll = React.createClass({
                          onClick={this.scrollCardsWrap({toLeft: true})}>
                         <div className={s.arrow}></div>
                     </div>
-                        :null}
+                :null}
+                
                 {this.showArrows() && this.canScrollRight()?
                     <div className={s.rightArrow}
                          onClick={this.scrollCardsWrap()}>
                         <div className={s.arrow}></div>
-                    </div>
-                        :null}
-                    <div className={s.container}
-                         style={{marginLeft: this.maxOffset, marginRight: this.maxOffset}}
-                         ref={updateContainer}>
-                        {React.Children.map(this.props.children, (child, index) => {
-                            const offset = getOffset({
-                                index,
-                                firstVisibleIndex:currentCard,
-                                lastVisibleIndex:lastCard,
-                                visibleStack: this.props.visibleStack,
-                                stackSpace: this.props.stackSpace
-                            })
-                            let position = offset
-                            let zIndex = -currentCard+index
-                            let className = "rcs-left-stack"
-                            if(offset==0){
-                                position = (index-currentCard)*this.widths.card
-                                if(index == lastCard && currentCard != lastCard){
-                                    zIndex = 0
-                                }
-                                className = "rcs-center"
-                            } else if(offset>0){
-                                position = offset + (lastCard-currentCard)*this.widths.card
-                                zIndex = lastCard-index-1
-                                className = "rcs-right-stack"
+                    </div> 
+                :null}
+
+                
+                <div className={s.container}
+                     style={{marginLeft: this.maxOffset, marginRight: this.maxOffset}}
+                     ref={updateContainer}>
+                    {React.Children.map(this.props.children, (child, index) => {
+                        const offset = getOffset({
+                            index,
+                            firstVisibleIndex:currentCard,
+                            lastVisibleIndex:lastCard,
+                            visibleStack: this.props.visibleStack,
+                            stackSpace: this.props.stackSpace
+                        })
+                        let position = offset
+                        let zIndex = -currentCard+index
+                        let className = "rcs-left-stack"
+                        if(offset==0){
+                            position = (index-currentCard)*this.widths.card
+                            if(index == lastCard && currentCard != lastCard){
+                                zIndex = 0
                             }
-                            const style = {left: position, zIndex}
-                            return (
-                                <div className={`${className} ${childrenClass}`} style={style} ref={index == 0 && updateChild}>
-                                    {child}
-                                </div>
-                            );
-                        })}
-                    </div>
+                            className = "rcs-center"
+                        } else if(offset>0){
+                            position = offset + (lastCard-currentCard)*this.widths.card
+                            zIndex = lastCard-index-1
+                            className = "rcs-right-stack"
+                        }
+                        const style = {left: position, zIndex}
+                        return (
+                            <div className={`${className} ${childrenClass}`} style={style} ref={index == 0 && updateChild}>
+                                {child}
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         )
     },

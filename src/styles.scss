@@ -3,14 +3,33 @@ $padding: 4px;
 $outMargin: -15px;
 $outPadding: $padding - $outMargin;
 
+$grid-columns:               12 !default;
+$grid-gutter-width:          1.875rem !default; // 30px
+
 .container {
     position: relative;
     z-index: 0;
     box-sizing: border-box;
     :global(.rcs-center), :global(.rcs-left-stack), :global(.rcs-right-stack){
         position: absolute;
-        transition: left 1s cubic-bezier(0,.7,.7,1), z-index 1s cubic-bezier(0,.7,.7,1);
+        transition:
+                left 1s cubic-bezier(0,.7,.7,1),
+                z-index 1s cubic-bezier(0,.7,.7,1);
         box-sizing: border-box;
+    }
+    :global(.rcs-center):after, :global(.rcs-left-stack):after, :global(.rcs-right-stack):after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background-color: #fff;
+        opacity: 0;
+        transition: opacity 1s cubic-bezier(0,.7,.7,1);
+    }
+    :global(.rcs-left-stack):after, :global(.rcs-right-stack):after{
+        opacity: 0.7;
     }
 }
 
@@ -78,9 +97,6 @@ $grid-breakpoints: (
     // Extra large screen / wide desktop
         xl: 1200px
 ) !default;
-
-$grid-columns:               12 !default;
-$grid-gutter-width:          1.875rem !default; // 30px
 
 @mixin make-col-span($size, $columns: $grid-columns) {
     width: percentage($size / $columns);
