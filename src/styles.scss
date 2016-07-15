@@ -17,7 +17,7 @@ $grid-gutter-width:          1.875rem !default; // 30px
                 z-index 1s cubic-bezier(0,.7,.7,1);
         box-sizing: border-box;
     }
-    :global(.rcs-center):after, :global(.rcs-left-stack):after, :global(.rcs-right-stack):after{
+    :global(.rcs-left-stack):after, :global(.rcs-right-stack):after{
         content: "";
         position: absolute;
         top: 0;
@@ -25,11 +25,8 @@ $grid-gutter-width:          1.875rem !default; // 30px
         right: 0;
         height: 100%;
         background-color: #fff;
-        opacity: 0;
-        transition: opacity 1s cubic-bezier(0,.7,.7,1);
-    }
-    :global(.rcs-left-stack):after, :global(.rcs-right-stack):after{
         opacity: 0.7;
+        transition: opacity 1s cubic-bezier(0,.7,.7,1);
     }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "react-card-scroll",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A React component to navigate horizontally between cards of same width",
   "main": "lib/index.js",
   "scripts": {
