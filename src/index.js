@@ -92,7 +92,7 @@ let CardScroll = React.createClass({
                     </div> 
                 :null}
 
-                
+
                 <div className={s.container}
                      style={{marginLeft: this.maxOffset, marginRight: this.maxOffset}}
                      ref={updateContainer}>
