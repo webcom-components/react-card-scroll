@@ -1,6 +1,6 @@
 {
   "name": "react-card-scroll",
-  "version": "2.2.3",
+  "version": "0.0.0-semantically-released",
   "description": "A React component to navigate horizontally between cards of same width",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "build": "BABEL_DISABLE_CACHE=1 NODE_ENV=LIB babel -d lib/ src",
     "dev": "BABEL_DISABLE_CACHE=1 NODE_ENV=LIB babel -d lib/ src -w",
     "example": "node webpack.example.js",
-    "prepublish": "BABEL_DISABLE_CACHE=1 NODE_ENV=LIB babel -d lib/ src"
+    "prepublish": "BABEL_DISABLE_CACHE=1 NODE_ENV=LIB babel -d lib/ src",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "react-component",
@@ -41,6 +42,7 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "sass-loader": "^3.2.0",
+    "semantic-release": "^4.3.5",
     "style-loader": "^0.13.1",
     "tape": "^4.5.1",
     "webpack": "^1.13.0",
