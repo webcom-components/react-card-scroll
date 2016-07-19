@@ -1,4 +1,10 @@
-# react-card-scroll
+# react-card-scroll  
+
+[![Travis](https://img.shields.io/travis/webcom-components/react-card-scroll.svg?style=flat-square)](https://travis-ci.org/webcom-components/react-card-scroll)
+[![Codecov](https://img.shields.io/codecov/c/github/webcom-components/react-card-scroll.svg?style=flat-square)](https://codecov.io/gh/webcom-components/react-card-scroll)
+[![npm](https://img.shields.io/npm/v/react-card-scroll.svg?style=flat-square)](https://www.npmjs.com/package/react-card-scroll)  
+
+
 A React component to horizontally navigate between components of same width (Bootstrap cards for example).  
 It is responsive and support dynamic card adds and removes.
 
