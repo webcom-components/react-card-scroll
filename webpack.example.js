@@ -1,5 +1,5 @@
 const WebpackDevServer = require('webpack-dev-server')
-const webpack = webpack = require("webpack")
+const webpack = require("webpack")
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
