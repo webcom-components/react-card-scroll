@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {throttle} from 'lodash'
+import throttle from 'lodash/throttle'
 import s from './styles.scss'
 import {getOffset, getMaxOffset} from './offset'
 
